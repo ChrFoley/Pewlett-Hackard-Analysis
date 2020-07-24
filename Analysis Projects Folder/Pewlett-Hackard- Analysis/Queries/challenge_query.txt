@@ -1,0 +1,42 @@
+same code was utilized for each query, only slightly modified to meet the reqs.
+
+-- Create the ret_by_title table. complete inner joins on four tables (employees, titles, salary, adn dept_emp)
+-- joined on emp_no.
+
+
+
+
+
+SELECT 	e.emp_no,
+		e.first_name,
+		e.last_name,
+		ti.title,
+		de.from_date,
+		de.to_date		
+INTO mentors
+FROM employees as e
+INNER JOIN titles as ti
+on (e.emp_no = ti.emp_no)
+INNER JOIN dept_emp as de
+ON (e.emp_no = de.emp_no)
+WHERE (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31');
+
+SELECT 	emp_no,
+		first_name,
+		last_name,
+		title,
+		from_date,
+		to_date
+INTO clean_mentors
+FROM
+	(SELECT emp_no,
+		first_name,
+		last_name,
+		title,
+		from_date,
+	to_date, ROW_NUMBER() OVER
+	(PARTITION BY (emp_no)
+	ORDER BY from_date DESC) rn
+	FROM mentors
+	) tmp WHERE rn = 1
+ORDER BY emp_no;
