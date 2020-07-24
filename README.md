@@ -8,5 +8,8 @@
     - dept_emp (employees in each department)
     - salaries
     - titles
+    
+    
+    
 ![FIG 1.](https://github.com/ChrFoley/Pewlett-Hackard-Analysis/blob/master/Module%20Exercise/EmployeeDB.png)
 
